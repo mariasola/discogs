@@ -1,0 +1,16 @@
+.release{
+    margin: 30px;
+    &-img{
+        width: 200px;
+        height: auto;
+    }
+    &-info{
+        &-artist{
+            font: 14px/19px  "Helvetica", "Arial", sans-serif; 
+        }
+    }
+    &_link {
+        text-decoration: none;
+        color: white;
+    }
+}
