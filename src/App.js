@@ -1,25 +1,34 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import getData from "./services/getData";
+import releases from "./services/getData";
 import Header from "./components/commons/Header";
 import Home from "./components/pages/Home";
 import ReleaseDetail from "./components/pages/ReleaseDetail";
 import "./styles/App.scss";
 
 class App extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      releases:[],
-      filterValue:"",
-      isFav: false
+      releases:releases.map(
+        item=>
+          (item={
+            id: item.id,
+            title:item.title,
+            label:item.label,
+            year:item.year,
+            artist:item.artist,
+            resource_url:item.resource_url,
+            community:item.stats,
+            isFav:false
+          }
+
+          )
+      ),
+      filterValue:""
     };
     this.handleFilter = this.handleFilter.bind(this);
-  }
-  componentDidMount() {
-    getData().then(releases => {
-      this.setState({ releases });
-    });
+    this.handleClick = this.handleClick.bind(this);
   }
   handleFilter(event) {
     const newState = {
@@ -33,9 +42,9 @@ class App extends React.Component {
       const releases = prevState.releases.map(release => {
         if (release.id === idClicked) {
           if (newStatus !== undefined) {
-            release.isPicked = newStatus;
+            release.isFav = newStatus;
           } else {
-            release.isPicked = !release.isPicked;
+            release.isFav = !release.isFav;
           }
         }
         return release;
@@ -52,6 +61,9 @@ class App extends React.Component {
         .toLowerCase()
         .includes(this.state.filterValue.toLowerCase())
     );
+    const pickedRelease = this.state.releases.filter(release => {
+      return release.isFav;
+    });
     return (
       <React.Fragment>
         <Header />
@@ -64,6 +76,8 @@ class App extends React.Component {
                 <Home
                   handleFilter={this.handleFilter}
                   releases={filteredReleases}
+                  handleClick={this.handleClick}
+                  pickedRelease={pickedRelease}
                 />
               );
             }}

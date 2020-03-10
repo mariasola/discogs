@@ -1,18 +1,28 @@
 import React from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import Item from "./Item";
 
 const ReleasesList = props => {
   const renderList = () => {
-    return props.releases.map(releases => {
+    return props.releases.map(item => {
       return (
-        <li className="release" key={releases.id}>
-            <Link
-            to={`/release-detail/${releases.id}`}
+        <li className="release" key={item.id}>
+            {/* <Link
+            to={`/release-detail/${item.id}`}
             className="release_link"
-            >
-              <Item releases={releases} />
-            </Link>
+            > */}
+              <Item 
+              key={item.id}
+              id= {item.id} 
+              title={item.title}
+              label={item.label}
+              year={item.year}
+              artist={item.artist}
+              resource_url={item.resource_url}
+              isFav={item.isFav}
+              handleClick={props.handleClick}
+              />
+            {/* </Link> */}
         </li>
       );
     });
