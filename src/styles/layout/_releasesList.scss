@@ -1,5 +1,10 @@
-.releases-list{
-    list-style: none;
+.releases{
     display:flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    &-list{
+        list-style: none;
+        display:flex;
+        flex-wrap: wrap;
+    }
 }

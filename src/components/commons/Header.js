@@ -1,19 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import albumLogo from "../../images/album.png";
+import Filters from "../commons/Filters";
 
 
-const Header = () => {
+const Header = (props) => {
+  const { handleFilter} = props;
     return (
       <header className="header">
-        <Link to="/" className="home_link">
+        <Link to="/" className="header-link">
         <img
-          className="header_img"
+          className="header-img"
           alt="album logo"
           src={albumLogo}
         />
-        <h1>Discogs</h1>
+        <h1 className="header-text">Discogs</h1>
         </Link>
+        <Filters handleFilter={handleFilter} />
       </header>
     );
   };

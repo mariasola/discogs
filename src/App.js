@@ -25,10 +25,13 @@ class App extends React.Component {
 
           )
       ),
+      visible: 4,
       filterValue:""
     };
     this.handleFilter = this.handleFilter.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.clearAll = this.clearAll.bind(this);
+    this.loadMore = this.loadMore.bind(this);
   }
   handleFilter(event) {
     const newState = {
@@ -54,10 +57,30 @@ class App extends React.Component {
       };
     });
   }
+  loadMore() {
+    this.setState((prev) => {
+      return {visible: prev.visible + 4};
+    });
+  }
+  clearAll() {
+    this.setState(prevState => {
+      const releases = prevState.releases.map(release => {
+        release.isFav = false;
+        return release;
+      });
+      return {
+        releases: releases
+      };
+    });
+  }
 
   render() {
     const filteredReleases = this.state.releases.filter(release =>
       release.title
+        .toLowerCase()
+        .includes(this.state.filterValue.toLowerCase())
+      ||
+      release.artist
         .toLowerCase()
         .includes(this.state.filterValue.toLowerCase())
     );
@@ -66,7 +89,7 @@ class App extends React.Component {
     });
     return (
       <React.Fragment>
-        <Header />
+        <Header handleFilter={this.handleFilter}/>
         <Switch>
           <Route
             exact
@@ -78,6 +101,9 @@ class App extends React.Component {
                   releases={filteredReleases}
                   handleClick={this.handleClick}
                   pickedRelease={pickedRelease}
+                  clearAll={this.clearAll}
+                  loadMore={this.loadMore}
+                  visible={this.state.visible}
                 />
               );
             }}

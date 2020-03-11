@@ -6,51 +6,27 @@ const ReleaseDetail = props => {
   const { routerProps, releases } = props;
   const releaseId = parseInt(routerProps.match.params.releaseId);
   const release = releases.filter(item => item.id === releaseId);
-//   const renderIcons = release => {
-//     let status;
-//     let species;
-//     if (release.status === "Dead") {
-//       status = " 💀";
-//     } else if (release.status === "Alive") {
-//       status = " ♡";
-//     } else {
-//       status = " ❔";
-//     }
-//     if (release.species === "Human") {
-//       species = " 👤";
-//     } else if (release.species === "Alien") {
-//       species = " 👽";
-//     }
-//     return (
-//       <p>
-//         {status}
-//         {species}
-//       </p>
-//     );
-//   };
   if (release[0]) {
     const { title, label, year, artist, resource_url} = release[0];
     return (
       <React.Fragment>
-        <div className="release_detail">
-          {/* <div className="release_detail_icons">
-            {renderIcons(release[0])}
-          </div> */}
-          <div className="release_detail_box">
-            <img className="release_detail_box_img" alt={title} src={resource_url} />
+        <div className="releaseDetail">
+          <div className="releaseDetail-box">
+            <img className="releaseDetail-box-img" alt={title} src={resource_url} />
           </div>
-          <div className="release_detail_info">
-            <h2 className="release_detail_info_name">{title}</h2>
-            <p className="release_detail_info_artist">{artist}</p>
-            <p className="release_detail_info_year">{year}</p>
-            <p className="release_detail_info_label">
+          <div className="releaseDetail-info">
+            <h2 className="releaseDetail-info-name">{title}</h2>
+            <p className="releaseDetail-info-artist">{artist}</p>
+            <p className="releaseDetail-info-year">{year}</p>
+            <p className="releaseDetail-info-label">
               {label}
             </p>
           </div>
-        </div>
-        <Link to="/" className="app__back">
+        
+        <Link to="/" className="releaseDetail-link">
           &larr; Back to the list
         </Link>
+        </div>
       </React.Fragment>
     );
   } else {

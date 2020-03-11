@@ -1,16 +1,13 @@
 import React from "react";
-// import { Link } from "react-router-dom";
 import Item from "./Item";
+import LoadMoreButton from "../commons/LoadMoreButton"
 
 const ReleasesList = props => {
+  console.log(props);
   const renderList = () => {
-    return props.releases.map(item => {
+    return props.releases.slice(0, props.visible).map(item => {
       return (
         <li className="release" key={item.id}>
-            {/* <Link
-            to={`/release-detail/${item.id}`}
-            className="release_link"
-            > */}
               <Item 
               key={item.id}
               id= {item.id} 
@@ -22,15 +19,16 @@ const ReleasesList = props => {
               isFav={item.isFav}
               handleClick={props.handleClick}
               />
-            {/* </Link> */}
         </li>
       );
     });
   };
   return (
     <section className="releases">
-      <h2 className="main">Search</h2>
       <ul className="releases-list">{renderList()}</ul>
+      {props.visible < props.releases.length &&
+             <LoadMoreButton loadMore={props.loadMore} type="button" className="load-more">Load more</LoadMoreButton>
+          }
     </section>
   );
 };

@@ -1,0 +1,19 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+    &-img{
+        height: 45px;
+    }
+    &-text{
+        font-size: 35px;
+        padding: 0 0 0 16px;
+    }
+    &-link{
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: white;
+    }
+}

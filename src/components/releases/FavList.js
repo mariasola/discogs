@@ -1,21 +1,23 @@
 import React from "react";
 import Item from "./Item";
+import ClearAll from "../commons/ClearAll"
 
 
 const FavList  = props => {
-    const { pickedRelease, handleClick } = props;
+    const { pickedRelease, handleClick, clearAll } = props;
     return (
-      <section className="rightSection">
-        <div className="clearCount">
-          <p className="clearCount-p">{pickedRelease.length} releases</p>
-          {/* <button className="clearCount-btn" onClick={clearAll}>
+      <section className="favSection">
+        <h2 className="favSection-title">Your collection</h2>
+        <div className="favSection-clearCount">
+          <p className="favSection-clearCount-p">{pickedRelease.length} releases</p>
+          <ClearAll className="favSection-clearCount-btn" clearAll={clearAll}>
             Clear All
-          </button> */}
+          </ClearAll>
         </div>
-        <div>
-          <ul className="cityPickedList">
+        <div className="favSection-pickedReleases">
+          <ul className="favSection-pickedReleases-list">
             {pickedRelease.map(pickedRelease => (
-              <li className="pickedReleaseItem">
+              <li className="favSection-pickedReleases-list-item">
                 <Item
                   key={pickedRelease.id}
                   id={pickedRelease.id}
@@ -25,7 +27,7 @@ const FavList  = props => {
                   artist={pickedRelease.artist}
                   resource_url={pickedRelease.resource_url}
                   isFav={pickedRelease.isFav}
-                //   clearAll={clearAll}
+                  clearAll={clearAll}
                   handleClick={handleClick}
                 />
               </li>
