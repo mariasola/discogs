@@ -1,19 +1,24 @@
-.header{
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 15px;
+  @media all and (max-width: 568px) {
+    height: 150px;
+    flex-direction: column;
+    align-content: space-between;
+  }
+  &-img {
+    height: 45px;
+  }
+  &-text {
+    font-size: 35px;
+    padding: 0 0 0 16px;
+  }
+  &-link {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin: 10px;
-    &-img{
-        height: 45px;
-    }
-    &-text{
-        font-size: 35px;
-        padding: 0 0 0 16px;
-    }
-    &-link{
-        display: flex;
-        align-items: center;
-        text-decoration: none;
-        color: white;
-    }
+    text-decoration: none;
+    color: white;
+  }
 }

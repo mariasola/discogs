@@ -10,23 +10,13 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      releases:releases.map(
-        item=>
-          (item={
-            id: item.id,
-            title:item.title,
-            label:item.label,
-            year:item.year,
-            artist:item.artist,
-            resource_url:item.resource_url,
-            community:item.stats,
-            isFav:false
-          }
-
-          )
-      ),
+      releases: releases.map(item => ({
+        ...item,
+        community: item.stats,
+        isFav: false
+      })),
       visible: 4,
-      filterValue:""
+      filterValue: ""
     };
     this.handleFilter = this.handleFilter.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -58,8 +48,8 @@ class App extends React.Component {
     });
   }
   loadMore() {
-    this.setState((prev) => {
-      return {visible: prev.visible + 4};
+    this.setState(prev => {
+      return { visible: prev.visible + 4 };
     });
   }
   clearAll() {
@@ -75,21 +65,21 @@ class App extends React.Component {
   }
 
   render() {
-    const filteredReleases = this.state.releases.filter(release =>
-      release.title
-        .toLowerCase()
-        .includes(this.state.filterValue.toLowerCase())
-      ||
-      release.artist
-        .toLowerCase()
-        .includes(this.state.filterValue.toLowerCase())
+    const filteredReleases = this.state.releases.filter(
+      release =>
+        release.title
+          .toLowerCase()
+          .includes(this.state.filterValue.toLowerCase()) ||
+        release.artist
+          .toLowerCase()
+          .includes(this.state.filterValue.toLowerCase())
     );
     const pickedRelease = this.state.releases.filter(release => {
       return release.isFav;
     });
     return (
       <React.Fragment>
-        <Header handleFilter={this.handleFilter}/>
+        <Header handleFilter={this.handleFilter} />
         <Switch>
           <Route
             exact

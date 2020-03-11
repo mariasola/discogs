@@ -4,19 +4,18 @@
 @import "layout/favList";
 @import "layout/releaseDetail";
 
-
 * {
   box-sizing: border-box;
   outline: none;
   margin: 0;
 }
-body{
-  font-family: 'Montserrat',"Helvetica", "Arial", sans-serif;
+body {
+  font-family: "Montserrat", "Helvetica", "Arial", sans-serif;
   background-color: black;
-  color:white;
+  color: white;
 }
-.App{
-  display:flex;
+.App {
+  display: flex;
   flex-direction: column;
   align-items: center;
 }
